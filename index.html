@@ -74,8 +74,9 @@
       <label>Phone</label>
       <input id="phone">
 
+      <!-- UPDATED: DOB range 1900–2030 -->
       <label>Date of Birth *</label>
-      <input id="dob" type="date" required>
+      <input id="dob" type="date" required min="1900-01-01" max="2030-12-31">
 
       <label>Gender *</label>
       <select id="gender" required>
@@ -85,9 +86,9 @@
         <option>Other</option>
       </select>
 
-      <!-- Re-introduced free-text Course input instead of fixed CSE dropdown -->
+      <!-- Course text field -->
       <label>Course *</label>
-      <input id="course" placeholder="Enter course / subject (e.g. Web Technology, Computer Networks, etc.)" required>
+      <input id="course" placeholder="Enter course / subject" required>
 
       <label>Address</label>
       <textarea id="address"></textarea>
@@ -132,7 +133,7 @@ $("regForm").addEventListener("submit", function(e){
     $("p_phone").innerText = $("phone").value;
     $("p_dob").innerText = $("dob").value;
     $("p_gender").innerText = $("gender").value;
-    $("p_course").innerText = $("course").value; // free-text
+    $("p_course").innerText = $("course").value;
     $("p_address").innerText = $("address").value;
 
     $("formCard").style.display = "none";
