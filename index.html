@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Registration Form + Preview + Medium PDF</title>
+
+<style>
+  :root{
+    --accent:#4A6CF7;
+    --green:#1c9f54;
+    --bg:#eef2f7;
+    --card:#fff;
+    --muted:#6b7280;
+    --radius:12px;
+  }
+  body{ margin:0; font-family:Arial, sans-serif; background:var(--bg); padding:28px; }
+  .container{ max-width:850px; margin:auto; }
+
+  .card{
+    background:var(--card);
+    padding:22px;
+    border-radius:var(--radius);
+    box-shadow:0 6px 18px rgba(12,30,60,0.1);
+    margin-bottom:20px;
+  }
+
+  h1{ margin:0 0 10px 0; color:var(--accent); font-size:22px; }
+  label{ display:block; font-weight:600; margin-top:12px; }
+
+  input, textarea, select{
+    width:100%; padding:10px; margin-top:6px;
+    border-radius:8px; border:1px solid #d8dcee;
+  }
+
+  textarea{ min-height:90px; }
+
+  button{
+    width:100%; padding:12px; border:0; cursor:pointer;
+    margin-top:18px; border-radius:8px; font-size:16px; font-weight:600;
+  }
+
+  .primary{ background:var(--accent); color:white; }
+  .primary:hover{ background:#2e52d1; }
+  .download{ background:var(--green); color:white; }
+  .download:hover{ background:#146b42; }
+
+  #previewCard{ display:none; }
+
+  #preview{
+    margin-top:10px; border:1px solid #ddd; background:white;
+    border-radius:10px; padding:18px;
+  }
+
+  .field strong{ color:var(--muted); display:block; margin-bottom:4px; }
+  .field p{ font-weight:600; margin:2px 0 10px 0; }
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- FORM CARD -->
+  <div class="card" id="formCard">
+    <h1>Registration Form</h1>
+
+    <form id="regForm">
+      <label>Full Name *</label>
+      <input id="fullname" required>
+
+      <label>Email *</label>
+      <input id="email" type="email" required>
+
+      <label>Phone</label>
+      <input id="phone">
+
+      <label>Date of Birth *</label>
+      <input id="dob" type="date" required>
+
+      <label>Gender *</label>
+      <select id="gender" required>
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+
+      <!-- Re-introduced free-text Course input instead of fixed CSE dropdown -->
+      <label>Course *</label>
+      <input id="course" placeholder="Enter course / subject (e.g. Web Technology, Computer Networks, etc.)" required>
+
+      <label>Address</label>
+      <textarea id="address"></textarea>
+
+      <button type="submit" class="primary">Submit → Show Preview</button>
+    </form>
+  </div>
+
+  <!-- PREVIEW CARD -->
+  <div class="card" id="previewCard">
+    <h1>Formatted Preview</h1>
+
+    <div id="preview">
+      <div class="field"><strong>Name</strong><p id="p_name">—</p></div>
+      <div class="field"><strong>Email</strong><p id="p_email">—</p></div>
+      <div class="field"><strong>Phone</strong><p id="p_phone">—</p></div>
+      <div class="field"><strong>Date of Birth</strong><p id="p_dob">—</p></div>
+      <div class="field"><strong>Gender</strong><p id="p_gender">—</p></div>
+      <div class="field"><strong>Course</strong><p id="p_course">—</p></div>
+      <div class="field"><strong>Address</strong><p id="p_address">—</p></div>
+    </div>
+
+    <button id="downloadPDF" class="download">Download PDF</button>
+    <button id="editBtn" class="primary" style="margin-top:10px;">Back & Edit</button>
+  </div>
+
+</div>
+
+<!-- jsPDF + html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// SHOW PREVIEW on Submit
+$("regForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    $("p_name").innerText  = $("fullname").value;
+    $("p_email").innerText = $("email").value;
+    $("p_phone").innerText = $("phone").value;
+    $("p_dob").innerText = $("dob").value;
+    $("p_gender").innerText = $("gender").value;
+    $("p_course").innerText = $("course").value; // free-text
+    $("p_address").innerText = $("address").value;
+
+    $("formCard").style.display = "none";
+    $("previewCard").style.display = "block";
+});
+
+// DOWNLOAD PDF (medium size)
+$("downloadPDF").addEventListener("click", async function() {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("p", "pt", "a4");
+
+    await pdf.html(document.getElementById("preview"), {
+        callback: function(doc) {
+            doc.save("Application_Form.pdf");
+        },
+        x: 40,
+        y: 40,
+        width: 500,
+        html2canvas: { scale: 0.8 }
+    });
+});
+
+// BACK BUTTON
+$("editBtn").addEventListener("click", () => {
+    $("previewCard").style.display = "none";
+    $("formCard").style.display = "block";
+});
+</script>
+
+</body>
+</html>

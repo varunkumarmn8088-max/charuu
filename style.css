@@ -1,0 +1,140 @@
+/* ======================================
+   Frosted Glassmorphism Premium UI Style ❄️✨
+   ====================================== */
+
+:root {
+    --primary: #e7b25c;
+    --primary-light: #8f82ff;
+    --primary-dark: #36c6c1;
+    --glass-bg: rgba(255, 255, 255, 0.22);
+    --glass-border: rgba(44, 143, 163, 0.35);
+    --text-light: #e7e8ff;
+    --text-dark: #1a1a2e;
+    --radius: 18px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #2d2b55, #413a8a);
+    color: #6f1616;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container with glass effect */
+.container {
+    width: 90%;
+    max-width: 700px;
+    padding: 35px;
+    border-radius: var(--radius);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: fadeIn 0.7s ease-out;
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+/* Smooth Fade Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Labels */
+label {
+    font-weight: 600;
+    margin-top: 15px;
+    display: block;
+    color: #ffffffcc;
+    letter-spacing: 0.3px;
+}
+
+/* Inputs */
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(112, 17, 141, 0.12);
+    color: #fff;
+    font-size: 15px;
+    transition: 0.25s ease;
+    outline: none;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #dcdcffaa;
+}
+
+input:focus, textarea:focus, select:focus {
+    background: rgba(255,255,255,0.18);
+    border-color: var(--primary-light);
+    box-shadow: 0 0 8px var(--primary-light);
+}
+
+/* Main Submit Button */
+button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius);
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 4px 12px rgba(108,92,231,0.36);
+}
+
+button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(108,92,231,0.6);
+}
+
+/* Preview Box */
+#previewBox {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: var(--radius);
+    margin-top: 30px;
+    animation: fadeIn 0.7s ease-out;
+}
+
+/* Preview Title */
+#previewBox h3 {
+    color: #0f853e;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* Download button */
+#downloadPDF {
+    background: #0a3d57;
+    margin-top: 10px;
+    box-shadow: 0 4px 16px rgba(0,255,200,0.25);
+}
+
+#downloadPDF:hover {
+    background: #009e7d;
+    transform: translateY(-2px);
+}
